@@ -9,8 +9,11 @@ all : binary
 binary : ${PLUGIN_NAME}.so
 
 ${PLUGIN_NAME}.so : ${PLUGIN_NAME}.c
-	$(CROSS_COMPILE)$(CC) $(PLUGIN_CPPFLAGS) -v -undefined dynamic_lookup $(PLUGIN_CFLAGS) $(PLUGIN_LDFLAGS) -fPIC -shared $< -o $@
-
+ifeq ($(UNAME),Darwin)	
+	$(CROSS_COMPILE)$(CC) $(PLUGIN_CPPFLAGS) -undefined dynamic_lookup $(PLUGIN_CFLAGS) $(PLUGIN_LDFLAGS) -fPIC -shared $< -o $@
+else
+	$(CROSS_COMPILE)$(CC) $(PLUGIN_CPPFLAGS)  $(PLUGIN_CFLAGS) $(PLUGIN_LDFLAGS) -fPIC -shared $< -o $@
+endif
 reallyclean : clean
 clean:
 	-rm -f *.o ${PLUGIN_NAME}.so *.gcda *.gcno
