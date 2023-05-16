@@ -44,6 +44,7 @@ Contributors:
 
 static mosquitto_plugin_id_t *mosq_pid = NULL;
 
+//消息回调
 static int callback_message(int event, void *event_data, void *userdata)
 {
 	struct mosquitto_evt_message *ed = event_data;
@@ -52,6 +53,8 @@ static int callback_message(int event, void *event_data, void *userdata)
 
 	UNUSED(event);
 	UNUSED(userdata);
+
+	mosquitto_log_printf( MOSQ_LOG_INFO, "plugin:message callback%s",ed->topic);
 
 	/* This simply adds "hello " to the front of every payload. You can of
 	 * course do much more complicated message processing if needed. */

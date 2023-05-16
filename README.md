@@ -1,3 +1,19 @@
+源码研究 仅保留server实现
+
+
+
+已知问题
+
+macos 如果出现
+```
+Undefined symbols for architecture x86_64:
+```
+增加编译参数 
+```
+-undefined dynamic_lookup
+```
+
+
 Eclipse Mosquitto
 =================
 
